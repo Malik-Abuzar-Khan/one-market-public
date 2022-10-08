@@ -2,13 +2,14 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   mainContainer: {
-    borderWidth:1,
-    borderColor:"black",
+    borderWidth: 1,
+    borderColor: "black",
     marginTop: 10,
     flexDirection: "row",
   },
   ItemImgContainer: {
     width: "22%",
+    height:"100%"
   },
   itemImage: {
     width: "100%",
@@ -17,7 +18,7 @@ export const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
     paddingLeft: 14,
-    paddingRight:4
+    paddingRight: 4,
   },
   itemName: {
     fontSize: 19.05,
@@ -78,3 +79,6 @@ export const styles = StyleSheet.create({
     height: 18,
   },
 });
+
+export const noImageUri =
+  "https://st4.depositphotos.com/14953852/24787/v/1600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg";

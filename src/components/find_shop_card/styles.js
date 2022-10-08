@@ -4,12 +4,12 @@ export const styles = StyleSheet.create({
   mainContainer: {
     width: "100%",
     textAlign: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    paddingTop: 16,
-    paddingBottom: 16,
-    borderRadius: 6,
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 4,
     shadowColor:"black",
-    elevation:4
+    elevation:2
   },
   textContainer: {
     width: "100%",

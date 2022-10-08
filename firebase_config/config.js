@@ -12,14 +12,11 @@ const firebaseConfig = {
   projectId: "one-market-48af0",
   storageBucket: "one-market-48af0.appspot.com",
   messagingSenderId: "67913978714",
-  appId: "1:67913978714:web:d11faac5012bdaa1cc1963"
+  appId: "1:67913978714:web:8387d6fca341928acc1963"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 var auth = getAuth(app);
 var db = getFirestore();
 
 export { app, auth, db };
-
-

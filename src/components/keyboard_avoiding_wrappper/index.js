@@ -6,7 +6,7 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 
-export default function KeyboardAvoidingViewWrapper({ children, scrollHeight }) {
+export default function KeyboardAvoidingViewWrapper({ children }) {
   return (
     <KeyboardAvoidingView style={styles.flex}>
       <ScrollView style={styles.flex}>

@@ -1,42 +1,72 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { HamburgerIcon, AppIcon, PersonIcon } from "../svgs/svgs";
+import Navigator from "../navigator";
+import * as RootNavigator from "../../source_services/root=navigation";
+import { auth } from "../../../firebase_config/config";
+import {useDispatch} from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
 
-export default function Header({ icons = true, personIconOnPress }) {
+
+export default function Header({ logOut }) {
+  const [showNavigator, setShowNavigator] = useState(false);
+  const [currentUser, setCurrentUser] = useState("");
+  const dispatch = useDispatch;
+
+  useEffect(() => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setCurrentUser(user);
+          dispatch(newUserdataGetter(user));
+        } else {
+          setCurrentUser("");
+        }
+      });
+  },[])
+
   return (
     <View style={styles.headerMainContainer}>
       <View>
-        <View style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setShowNavigator(true)}
+        >
           <HamburgerIcon />
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={{ ...styles.appIconContainer }}>
         <View style={styles.button}>
           <AppIcon />
           <Text style={styles.heading}>
-            ONE <Text style={styles.span}>MARKET</Text>
+            ONE<Text style={styles.span}>MARKET</Text>
           </Text>
         </View>
       </View>
-      {icons && (
+      {!currentUser?.uid ? (
         <View style={styles.iconsBtnContainer}>
-          <TouchableOpacity style={styles.button} onPress={personIconOnPress}>
-            <PersonIcon color="#000000" />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => RootNavigator.navigate("sign-in")}
+          >
+            <PersonIcon
+              height={styles.personIcon.height}
+              color={styles.personIcon.color}
+            />
           </TouchableOpacity>
-          <View style={styles.button}></View>
-
-          <View style={styles.button}></View>
         </View>
+      ) : (
+        <TouchableOpacity style={styles.logoutButton} onPress={logOut}>
+        <Text style={styles.logoutButtonText}>Logout</Text>
+      </TouchableOpacity>
       )}
-      {
-        <TouchableOpacity
-          style={styles.logoutButton}
-          onPress={personIconOnPress}
-        >
-          <Text style={styles.logoutButtonText}>Logout</Text>
-        </TouchableOpacity>
-      }
+      {showNavigator && (
+        <Navigator
+          crossIconOnPress={() => setShowNavigator(false)}
+          setShowNavigator={setShowNavigator}
+          navigation={RootNavigator}
+        />
+      )}
     </View>
   );
 }

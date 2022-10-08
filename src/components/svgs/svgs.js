@@ -46,8 +46,8 @@ export const LockIcon = () => (
   </Svg>
 );
 
-export const PersonIcon = ({ color }) => (
-  <Svg width={20} height={18.5} fill={color}>
+export const PersonIcon = ({ height, color }) => (
+  <Svg width={20} height={height} fill={color}>
     <Path fill="none" d="M0 0h24v24H0V0z" />
     <Path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z" />
   </Svg>
@@ -61,13 +61,13 @@ export const PhoneIcon = () => (
 );
 
 export const ArrowIcon = () => (
-  <Svg viewBox="0 0 24 24" width={24} height={24}>
+  <Svg viewBox="0 0 24 24" width={22} height={22} fill="#000000">
     <Path d="M1.293 12.707a1 1 0 0 1-.216-.325.986.986 0 0 1 0-.764 1 1 0 0 1 .216-.325l8-8a1 1 0 1 1 1.414 1.414L4.414 11H22a1 1 0 0 1 0 2H4.414l6.293 6.293a1 1 0 0 1-1.414 1.414Z" />
   </Svg>
 );
 
 export const HamburgerIcon = () => (
-  <Svg width={26} height={26} viewBox="0 0 24 24">
+  <Svg width={30} height={30} viewBox="0 0 24 24" fill="#000000">
     <Path fill="none" d="M0 0h24v24H0z" />
     <Path d="M18.2 12.7H5.8c-.5 0-.8-.3-.8-.7s.3-.7.7-.7h12.5c.4 0 .7.3.7.7s-.2.7-.7.7zm.8-4.9c0-.5-.3-.8-.7-.8H5.8c-.5 0-.8.4-.8.8s.3.7.7.7h12.5c.5 0 .8-.3.8-.7zm0 8.4c0-.4-.3-.7-.7-.7H5.8c-.4 0-.7.3-.7.7-.1.4.3.8.7.8h12.5c.4 0 .7-.3.7-.8z" />
   </Svg>
@@ -95,7 +95,7 @@ export const AppIcon = (props) => (
   </Svg>
 );
 
-export const SearchIcon = ({color}) => (
+export const SearchIcon = ({ color }) => (
   <Svg
     width={18}
     height={18}
@@ -108,8 +108,7 @@ export const SearchIcon = ({color}) => (
   </Svg>
 );
 
-
-export const DownArrow = ({width, height, color}) => (
+export const DownArrow = ({ width, height, color }) => (
   <Svg width={width} height={height} fill={color} viewBox="0 0 24 24">
     <Path
       d="m21.71 8.21-9 9a1 1 0 0 1-1.42 0l-9-9a1 1 0 1 1 1.42-1.42l8.29 8.3 8.29-8.3a1 1 0 1 1 1.42 1.42Z"
@@ -118,14 +117,8 @@ export const DownArrow = ({width, height, color}) => (
   </Svg>
 );
 
-
 export const EditIcon = ({ width, height, color }) => (
-  <Svg
-    width={width}
-    height={height}
-    fill={color}
-    viewBox="0 0 29 29"
-  >
+  <Svg width={width} height={height} fill={color} viewBox="0 0 29 29">
     <Path
       d="M0 15.042V19h4.374L17.276 7.327 12.902 3.37 0 15.042ZM20.659 4.266a.982.982 0 0 0 0-1.488l-2.73-2.47a1.25 1.25 0 0 0-1.645 0L14.15 2.24l4.374 3.958 2.135-1.932Z"
       fill={color}
@@ -135,11 +128,7 @@ export const EditIcon = ({ width, height, color }) => (
 );
 
 export const DeleteIcon = ({ width, height, color }) => (
-  <Svg
-    width={width}
-    height={height}
-    fill={color}
-  >
+  <Svg width={width} height={height} fill={color}>
     <Path fill="url(#a)" fillOpacity={0.7} d="M0 0h23v48H0z" />
     <Defs>
       <Pattern
@@ -156,15 +145,10 @@ export const DeleteIcon = ({ width, height, color }) => (
       />
     </Defs>
   </Svg>
-)
+);
 
-
-export const StarsIcon = ({width, height, color}) => (
-  <Svg
-    width={width}
-    height={height}
-    fill={color}
-  >
+export const StarsIcon = ({ width, height, color }) => (
+  <Svg width={width} height={height} fill={color}>
     <Path fill="url(#a)" d="M.145.284h48.604v14.221H.145z" />
     <Defs>
       <Pattern
@@ -183,15 +167,10 @@ export const StarsIcon = ({width, height, color}) => (
       />
     </Defs>
   </Svg>
-)
+);
 
-
-export const MessengerIcon = ({width, height}) => (
-  <Svg
-    width={width}
-    height={height}
-    fill="none"
-  >
+export const MessengerIcon = ({ width, height }) => (
+  <Svg width={width} height={height} fill="none">
     <Path fill="url(#a)" d="M.27.142h23.289V17.41H.27z" />
     <Defs>
       <Pattern
@@ -209,5 +188,44 @@ export const MessengerIcon = ({width, height}) => (
         xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAAFcElEQVR4nO2dTWhcVRTHf4mtndA0jbRaizJE3dS0WouIHy1S3BSFKooiftWuRK0fqFg34kr8QG0XdaFuWqQIFkVQqwh2o11odZUYhGr9QEuS1qLGpE3J2HFxZnAcO3M/3rvvvDdzf3A2eTPvnvO/M3fuO/fcG4hEIpFIJBKJRCKRSCQSiXQLPQptng9cDVwOXARcACwH+oCB2mumgOPABPBDzb4GvgB+zdjfwtMLXAtsR4SsJrRDwLbaPXszjKNwLAW2IoIlFb2VfQ88CSzJKKZC0A88BfxJOOGbbRp4ARjMIL5cswk4SnbCN9sR4O7gUeaQc4FP0BO+2T4GlgWNOEesBQ6jL3qzHQauCRh3LrgJOIG+2K3sJHBrsOiV2QxU0BfZZBXgnkAaqHEDMIe+uC6dcGMQJRS4DJn2aYvqalPAJQH0yJQSMIq+mL42hqQ8CssO9EVMattTVyUjLqZY434rqwArU9YmE/aiL15a9kHK2gRnJXAKfeHStFWpKuSJbTr3YXTWDkJyv7YDYCfqGcAknZfyPYosBP2t6YTNN2AtnSc+wNnAldpO2HTA+uBe6HGdtgM2HXBpcC/0UH8ytumA4eBe6KH+PGDTAZ04/tdZari+CNiCcvpiFv05eyg7YYh9Qe11E0iBwSJ72dJjBn2hQtlxQ+ylptePA7dYK5cSP6EjThY2YYh9WYv3vYVMYxNj8xvwWxoN5RRTbItb/P0OpFIv8SzKpgN+TtpIjhkzXD+nzbUysB/YkMQBmw74PEkDOWfEcN00TR0APgRu83XApgM+8715AdhnuG6TMZ0H7CbgU3U9Gaf9g5m2TWL+AO53uN8xZNEqCM85OFIU22GIeRD3FcAR4EyznO6UKUYNkK2dAlYYYr7d897PmOX0Y4+nQ3m09y3i3e1571kC5c/KFLMeqNnmMM9ulpCs5HKPWU4/nk7gVF7sFYs4n0jYRgUYsmjHmXpyqqg2iuR32jGfdHb1bDPL6Ye2iL42hd28/sGU2jtCoD1s2kL6WAXYaBFbP5LxTKvd1RZtOqMtpqvNAXdZxvZSym0/ZtmuE9qCutgscLNlXOuQEpU023/Psm0ntEW1tV+QDeE29CNbXtP2YdSyfSe0hbWxvbRPJTfSi3xSQ/hxzNIHJ7TFbWeTwJ2O8bwY0J+Tjr5YoS3y6ewPJAfjumi+JbBf047+WKEtdqMdBB4HzvKI4xHCV3z/6OGXEVcndiLljS8jgiUN6rvavdbhX7G9lWzK7Q+YHPEJoGr5uhngIWBX09+XI0WxV/Df42r6+XcI+Qv5+jYeV/MVclzNuIfPdUrAa8C9Ce7hwjskWK5shU3Pj5G/ksYh5BOZ5RD5aIhATI2+CSwM0bAnPcB9SC4oS/GrZJyKmEZ2z+eJYeBTshe+it2asxena+xbclDq3cB5wOvo7up8NlRwzQ3tJD9DzirgDaTmU0v4KpJ9LYcKMm9DziBySNM+dEVvtLdDBlxFd5bTiwx3DwAfIY/72oI32gwOy5HzPATYhczvZzzea8N85JlgANkYMQRciDwzDCMZzlZFs3ngeaSivJCUkKpj7U9xEluQuioZU0b34L+k1hFsIH9je1d1AMD15Ps8uo7vAChmJ3Qca5AUtLawXdsBINPOd9EXt2s7oM5G0jmBPXZAAvqQ9d/f0Re7KzugTgk5LPwb9EXvyg6o0wNchWyjGiG5gAeREsX1SKY3aAd02jFkIP8iZQ2Sml6N5JEGkR/yxcimw/qa8zhSuXAIWXP+kv+vOW8GXsU+5d6JmqqzAvtvVyQQfcgqW+wAZTbRfq9cJAPaDUmRjGg1JEUypnlIiijQOCRFlFiIPLhFIpFIJBKJRCKRSFv+AT/VjSxvLHSzAAAAAElFTkSuQmCC"
       />
     </Defs>
+  </Svg>
+);
+
+export const CrossIcon = ({ width, height, color }) => (
+  <Svg viewBox="0 0 101 101" width={width} height={height} fill={color}>
+    <Path d="M83.9 17.1c-.9-.9-2.5-.9-3.4 0l-30 30-30-30c-.9-.9-2.5-.9-3.4 0s-.9 2.5 0 3.4l30 30-30 30c-.9.9-.9 2.5 0 3.4.5.5 1.1.7 1.7.7.6 0 1.2-.2 1.7-.7l30-30 30 30c.5.5 1.1.7 1.7.7.6 0 1.2-.2 1.7-.7.9-.9.9-2.5 0-3.4l-30-30 30-30c.9-.9.9-2.4 0-3.4z" />
+  </Svg>
+);
+
+export const AddPhotoIcon = () => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={24} height={24}>
+    <Path fill="none" d="M0 0h24v24H0V0z" />
+    <Path
+      fill={"#404040"}
+      d="M21.02 5H19V2.98c0-.54-.44-.98-.98-.98h-.03c-.55 0-.99.44-.99.98V5h-2.01c-.54 0-.98.44-.99.98v.03c0 .55.44.99.99.99H17v2.01c0 .54.44.99.99.98h.03c.54 0 .98-.44.98-.98V7h2.02c.54 0 .98-.44.98-.98v-.04c0-.54-.44-.98-.98-.98zM16 9.01V8h-1.01c-.53 0-1.03-.21-1.41-.58-.37-.38-.58-.88-.58-1.44 0-.36.1-.69.27-.98H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8.28c-.3.17-.64.28-1.02.28A2 2 0 0 1 16 9.01zM15.96 19H6a.5.5 0 0 1-.4-.8l1.98-2.63c.21-.28.62-.26.82.02L10 18l2.61-3.48c.2-.26.59-.27.79-.01l2.95 3.68c.26.33.03.81-.39.81z"
+    />
+  </Svg>
+);
+
+export const PlusIcon = () => (
+  <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={"#FFFFFF"}>
+    <Path
+      fill={"#FFFFFF"}
+      d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2Z"
+    />
+  </Svg>
+);
+
+export const CartIcon = () => (
+  <Svg
+    width={18}
+    height={19}
+    fill="#000000"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <Path
+      d="M9.161 7.091h1.708V4.48h2.562V2.74h-2.562V.125H9.161v2.612H6.6V4.48H9.16v2.612Zm-3.415 7.837c-.94 0-1.7.783-1.7 1.74 0 .959.76 1.742 1.7 1.742s1.708-.784 1.708-1.741c0-.958-.769-1.742-1.708-1.742Zm8.538 0c-.939 0-1.699.783-1.699 1.74 0 .959.76 1.742 1.7 1.742.939 0 1.707-.784 1.707-1.741 0-.958-.768-1.742-1.708-1.742Zm-8.393-2.83.026-.105.768-1.419h6.361c.64 0 1.204-.357 1.495-.897l3.296-6.103-1.486-.836h-.009l-.939 1.741-2.357 4.354H7.052l-.11-.235-1.913-4.119-.812-1.74L3.415.996H.623v1.741H2.33l3.074 6.609-1.152 2.133a1.71 1.71 0 0 0-.214.835c0 .958.769 1.742 1.708 1.742h10.246v-1.742H6.104a.219.219 0 0 1-.213-.217Z"
+      fill="#000"
+    />
   </Svg>
 )

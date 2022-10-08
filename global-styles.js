@@ -8,5 +8,8 @@ export const styles = StyleSheet.create({
       marginLeft: "auto",
       marginRight: "auto",
     },
+    header: {
+      backgroundColor:"#F2F2F2"
+    }
   });
   

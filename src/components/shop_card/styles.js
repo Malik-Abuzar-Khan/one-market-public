@@ -2,14 +2,13 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   mainContainer: {
-    marginTop: 16,
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
     width: 105,
     paddingTop: 6,
     paddingLeft: 4,
     paddingRight: 4,
     textAlign: "center",
-    borderRadius: 5,
+    borderRadius: 4,
     shadowColor:"black",
     elevation:2,
     marginRight:4
@@ -23,7 +22,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth:2,
     // borderColor:"#FC0F0F"
-    borderColor:"#404040"
+    borderColor:"#DF0404"
   },
   image: {
     width: "100%",

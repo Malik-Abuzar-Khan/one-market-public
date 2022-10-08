@@ -2,15 +2,18 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   headerMainContainer: {
-    paddingTop: 14,
+    width:"98%",
+    paddingTop: 14.4,
     paddingBottom: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     borderBottomColor: "#C4C4C4",
     borderBottomWidth: 1,
-    position: "relative",
-    marginTop: 20,
+    paddingRight: 1.4,
+    alignSelf:"center",
+    transform:[{translateX: -10}]
+    
   },
   button: {
     flexDirection: "row",
@@ -68,12 +71,22 @@ export const styles = StyleSheet.create({
   logoutButton: {
     borderWidth: 0.4,
     borderColor: "black",
+    backgroundColor: "#000000",
     padding: 6,
     borderRadius: 2,
     shadowColor: "#000000",
     elevation: 1,
   },
   logoutButtonText: {
-    fontSize: 10
+    fontSize: 10,
+    color: "#E5E5E5",
+  },
+  emptyBox: {
+    padding: 12,
+    backgroundColor: "yellow",
+  },
+  personIcon: {
+    color:"#000000",
+    height:20
   }
 });
