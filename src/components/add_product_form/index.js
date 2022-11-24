@@ -6,21 +6,22 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import { auth } from "../../../firebase_config/config";
 import ImagePickerComp from "../image_picker";
 import PopUpScreenWrapper from "../pop_up_screen_wrapper";
 import { CrossIcon } from "../svgs/svgs";
 import { styles } from "./styles";
 import { addNewProduct } from "./services";
 import Loader from "../app_loader";
+import { useDispatch } from "react-redux";
 
-export default function AddProductForm({ setCreateProductScreen }) {
+export default function AddProductForm({ setCreateProductScreen, token, setAddProduct, number }) {
   const [productName, setProductName] = useState("");
   const [productDescription, setProductsDescription] = useState("");
   const [productPrice, setProductsPrice] = useState("");
   const [image, setImage] = useState(null);
+  const [base64, setBase64] = useState(null);
   const [loader, setLoader] = useState(false);
-  let token = auth?.currentUser?.uid;
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -69,7 +70,7 @@ export default function AddProductForm({ setCreateProductScreen }) {
                   onChangeText={setProductsPrice}
                 />
               </View>
-              <ImagePickerComp image={image} setImage={setImage} />
+              <ImagePickerComp image={image} setImage={setImage} base64={base64} setBase64={setBase64}/>
               <TouchableOpacity
                 style={styles.fromBtn}
                 onPress={async () =>
@@ -78,9 +79,12 @@ export default function AddProductForm({ setCreateProductScreen }) {
                     productName,
                     productDescription,
                     productPrice,
-                    image,
+                    base64,
                     setCreateProductScreen,
-                    setLoader
+                    setLoader,
+                    setAddProduct,
+                    dispatch,
+                    number
                   )
                 }
               >

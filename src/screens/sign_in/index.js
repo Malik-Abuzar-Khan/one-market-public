@@ -6,8 +6,9 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
+import {useDispatch} from 'react-redux';
 import { styles } from "./styles";
-import { EnvelopIcon, LockIcon } from "../../components/svgs/svgs";
+import { PhoneIcon, LockIcon } from "../../components/svgs/svgs";
 import { signIn } from "./services";
 import Loader from "../../components/app_loader";
 
@@ -23,6 +24,7 @@ export default function SignIn({ navigation }) {
     setPasswordError,
     setPasswordLengthError,
   };
+const dispatch = useDispatch();
 
   useEffect(() => {
     if (email.length !== 0) {
@@ -51,17 +53,17 @@ export default function SignIn({ navigation }) {
                 {emailError && (
                   <View style={styles.errorContainer}>
                     <Text style={styles.errorText}>
-                      Please enter your email
+                      Please enter your Phone Number
                     </Text>
                   </View>
                 )}
                 <View style={styles.inputContainer}>
                   <View style={styles.envelopeIconContainer}>
-                    <EnvelopIcon />
+                    <PhoneIcon />
                   </View>
                   <TextInput
                     style={styles.input}
-                    placeholder="Email"
+                    placeholder="Phone Number"
                     value={email}
                     onChangeText={setEmail}
                     // placeholderTextColor={"red"}
@@ -92,6 +94,8 @@ export default function SignIn({ navigation }) {
                     placeholder="Password"
                     value={password}
                     onChangeText={setPassword}
+                    textContentType='password'
+                    secureTextEntry={true}
                   />
                 </View>
                 <View style={styles.forgetPassBtnContainer}>
@@ -110,7 +114,7 @@ export default function SignIn({ navigation }) {
                   <TouchableOpacity
                     style={styles.btn}
                     onPress={() =>
-                      signIn(email, password, errorHandlers, navigation, setLoading)
+                      signIn(email, password, errorHandlers, dispatch, navigation, setLoading)
                     }
                   >
                     <Text style={styles.loginBtnText}>Log in</Text>

@@ -1,30 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { HamburgerIcon, AppIcon, PersonIcon } from "../svgs/svgs";
 import Navigator from "../navigator";
 import * as RootNavigator from "../../source_services/root=navigation";
-import { auth } from "../../../firebase_config/config";
-import {useDispatch} from "react-redux";
-import { onAuthStateChanged } from "firebase/auth";
 
-
-export default function Header({ logOut }) {
+export default function Header({ logOut, token, number }) {
   const [showNavigator, setShowNavigator] = useState(false);
-  const [currentUser, setCurrentUser] = useState("");
-  const dispatch = useDispatch;
-
-  useEffect(() => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setCurrentUser(user);
-          dispatch(newUserdataGetter(user));
-        } else {
-          setCurrentUser("");
-        }
-      });
-  },[])
-
   return (
     <View style={styles.headerMainContainer}>
       <View>
@@ -43,7 +25,7 @@ export default function Header({ logOut }) {
           </Text>
         </View>
       </View>
-      {!currentUser?.uid ? (
+      {!token ? (
         <View style={styles.iconsBtnContainer}>
           <TouchableOpacity
             style={styles.button}
@@ -62,6 +44,8 @@ export default function Header({ logOut }) {
       )}
       {showNavigator && (
         <Navigator
+          token={token}
+          number={number}
           crossIconOnPress={() => setShowNavigator(false)}
           setShowNavigator={setShowNavigator}
           navigation={RootNavigator}

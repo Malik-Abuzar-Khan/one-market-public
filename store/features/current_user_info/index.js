@@ -8,11 +8,12 @@ export const currentUserData = createSlice({
   name: "currentUserData",
   initialState,
   reducers: {
-    newUserdataGetter: (state, action) => {
+    userdataGetter: (state, action) => {
       state.data.push(action.payload);
+      console.log("user in store: ", action.payload)
     },
   },
 });
 
-export const { newUserdataGetter } = currentUserData.actions;
+export const { userdataGetter } = currentUserData.actions;
 export default currentUserData.reducer;

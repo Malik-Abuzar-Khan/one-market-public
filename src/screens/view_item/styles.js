@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-
+import { StyleSheet, Dimensions } from "react-native";
+let height = Dimensions.get("window").height;
 export const styles = StyleSheet.create({
     mainContainer: {
         width: "94%",

@@ -1,10 +1,13 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+let height = Dimensions.get("window").height;
 
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: "#ffffff",
-    height: 230,
-    backgroundColor:"orange"
+    height: height - 415,
+    marginTop:10,
+    borderRadius: 2,
+    shadowColor: "black",
   },
   itemsHeadingRowText: {
     color: "#000",
@@ -28,11 +31,11 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
   },
   fullWidth: {
-    width: "100%",
+    width: "99.79%",
   },
   scrollViewHeight: {
-    backgroundColor:"green",
-    height:"78%"
+    height:"82%"
+    
   },
   rowContainers: {
     width: 117.4,
@@ -43,26 +46,28 @@ export const styles = StyleSheet.create({
     paddingVertical: 4
   },
   productNameContainerWidth: {
-    width: 117,
+    height:54,
+    width: "36%",
   },
   productNameText: {
     alignSelf: "center",
     marginHorizontal: 5,
   },
   productDescriptionContainerWidth: {
-    width: 102,
+    width: "32%",
+    paddingLeft: 5,
+    paddingRight: 5
   },
   productDescriptionText: {
     alignSelf: "center",
   },
   productEditContainerWidth: {
-    width: 60,
-    paddingTop: 10,
+    width: '16%',
   },
   productDeleteContainerWidth: {
-    width: 58.2,
+    width: '18%',
   },
 });
 
 export const iconColor = "#000000";
-export const rowCellSizes = [118, 102, 60, 58.2]
+export const rowCellSizes = [118, 111, 60, 58.2]

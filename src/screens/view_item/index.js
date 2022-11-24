@@ -1,32 +1,49 @@
 import React from "react";
-import { View, ScrollView, TouchableOpacity } from "react-native";
+import { View, ScrollView, TouchableOpacity, Linking } from "react-native";
 import { styles } from "./styles";
 import ViewCard from "../../components/view_card";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ItemCard from "../../components/item_card";
+import { navigateToViewItem } from "../home/services";
 
-export default function Item() {
-  const cardData = useSelector((state) => state.viewCaedData.data);
+export default function Item({ navigation }) {
+  const cardData = useSelector((state) => state.viewCardData.data);
   const allItemsdata = useSelector((state) => state.allItems.data);
+  const dispatch = useDispatch();
 
+  let url = 'whatsapp://app';
+  function openInWhatsapp() {
+    Linking.openURL(url).then((data) => {
+      console.log('WhatsApp Opened');
+    }).catch((err) => {
+      console.log(err);
+      alert('Make sure Whatsapp installed on your device');
+    });
+
+  }
+  
+
+  console.log('card: ', cardData)
   return (
     <View style={styles.mainContainer}>
       <View>
-        <ViewCard uri={cardData?.uri} price={cardData?.productPrice} productName={cardData?.productName}/>
-        <ScrollView style={{ height: "42%", marginTop: 10 }}>
-            <View>
-              {allItemsdata?.map((i) => (
-                <TouchableOpacity key={i?.docId}>
-                  <ItemCard
-                    uri={i?.uri}
-                    producName={i?.productName}
-                    productDescription={i?.productDescription}
-                    productPrice={i?.productPrice}
-                  />
-                </TouchableOpacity>
-              ))}
-            </View>
-          </ScrollView>
+        <ViewCard uri={cardData['item_image']} price={cardData['item_price']} productName={cardData['item_name']} description={cardData['item_discription']} goto={openInWhatsapp}/>
+        <ScrollView style={{ height: 320, marginTop: 10 }}>
+          <View>
+            {allItemsdata?.map((i) => (
+              <TouchableOpacity key={i['_id']}
+                onPress={() => navigateToViewItem(dispatch, i, navigation)}
+              >
+                <ItemCard
+                  uri={i['item_image']}
+                  producName={i['item_name']}
+                  productDescription={i['item_discription']}
+                  productPrice={i['item_price']}
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+        </ScrollView>
       </View>
     </View>
   );

@@ -1,12 +1,9 @@
 import { StyleSheet, Dimensions } from "react-native";
-var height = Dimensions.get("window").height;
+let height = Dimensions.get("window").height;
 
 export const styles = StyleSheet.create({
   mainContainer: {
-    flex:1,
-    position: "relative",
-    maxHeight: height,
-    paddingBottom:550
+    
   },
   wrapperContainer: {
     width: "94%",

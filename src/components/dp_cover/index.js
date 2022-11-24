@@ -9,15 +9,16 @@ import {
 import { AddPhotoIcon, EditIcon, PlusIcon } from "../svgs/svgs";
 import {
   pickImage,
-  updateCoverPictureInDoc,
-  updateProfilePictureInDoc,
+  uploadDp,
+  uploadCover
 } from "./services";
 import Loader from "../app_loader";
 import EditShopNameAndDescripton from "../edit_shop_name_description";
+import { useDispatch } from "react-redux";
 
 export default function DpCover({
   shopInfo,
-  currentUser,
+  setShopUpate,
   selectCoverBtn = true,
   editBtn = true,
   addBtn = true,
@@ -28,13 +29,13 @@ export default function DpCover({
     editShopNameAndDescriptionScreen,
     setEditShopNameAndDescriptionScreen,
   ] = useState(false);
-
-  let shopName = shopInfo[0]?.shop_name;
-  let token = shopInfo[0]?.token;
-  let docId = shopInfo[0]?.docId;
-  let shopDescription = shopInfo[0]?.shop_description;
-  let shopProfilePicture = shopInfo[0]?.shop_profile_picture;
-  let shopCover = shopInfo[0]?.shop_cover_picture;
+  let shopName = shopInfo && shopInfo[0]?.shop_name;
+  let token = shopInfo && shopInfo[0]?.primary_id;
+  let docId = shopInfo && shopInfo[0]?._id;
+  let shopDescription = shopInfo && shopInfo[0]?.shop_discription;
+  let shopProfilePicture = shopInfo && shopInfo[0]?.shop_profile_picture;
+  let shopCover = shopInfo && shopInfo[0]?.shop_cover_photo;
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.coverAndProfileContainer}>
@@ -50,11 +51,11 @@ export default function DpCover({
               style={styles.addCoverIcon}
               onPress={() =>
                 pickImage(
-                  token,
                   docId,
-                  updateCoverPictureInDoc,
-                  "cover-picture",
-                  setCoverPictureloading
+                  uploadCover,
+                  setShopUpate,
+                  setCoverPictureloading,
+                  dispatch
                 )
               }
             >
@@ -109,11 +110,11 @@ export default function DpCover({
             style={styles.addProfileImageBtn}
             onPress={() =>
               pickImage(
-                token,
                 docId,
-                updateProfilePictureInDoc,
-                "profile-picture",
-                setProfilePictureloading
+                uploadDp,
+                setShopUpate,
+                setProfilePictureloading,
+                dispatch
               )
             }
           >
@@ -126,8 +127,8 @@ export default function DpCover({
           setEditShopNameAndDescriptionScreen={
             setEditShopNameAndDescriptionScreen
           }
-          token={token}
           docId={docId}
+          setShopUpate={setShopUpate}
         />
       )}
     </View>

@@ -32,6 +32,9 @@ export const styles = StyleSheet.create({
   textContainer: {
     paddingBottom: 10,
     paddingTop: 10,
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"center"
   },
   text: {
     color: "white",

@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
   mainContainer: {
     paddingBottom:20,
     marginTop:20,
+    height: height
   },
   arrowBtn: {
      paddingTop: 20, 
@@ -52,18 +53,9 @@ export const styles = StyleSheet.create({
   },
   errorContainer: {
     flex: 1,
-    height: 46,
-    margin: 10,
-    borderWidth: 1,
-    borderColor: "red",
-    borderRadius: 7,
     paddingTop: 10,
-    paddingBottom: 12,
     paddingLeft: 14,
-    paddingRight: 8,
-    flexDirection: "row",
-    shadowColor:"black",
-    elevation:2,
+    paddingRight: 8, 
   },
   errorText: {
     color: "red"
@@ -161,8 +153,86 @@ export const styles = StyleSheet.create({
   loadingText: {
     color:"white",
     fontSize: 22
-  }
+  },
+  dropDownContainer: {
+    width:"94%",
+    marginTop: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    marginBottom: 15,
+    borderRadius: 7,
+    paddingRight: 0,
+    paddingRight:4,
+    position:"relative",
+    height: 44,
+    marginLeft: "auto",
+    marginRight: "auto",
+    shadowColor:"#000000",
+    elevation:2
+  },
+  dropDownContainerNoMargin: {
+    marginTop: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 1.5,
+    paddingRight:4,
+    width:320,
+  
+  },
+  dropDownbtn: {
+    height: 30,
+    borderRadius: 6,
+    paddingTop: 2,
+    paddingBottom: 2,
+    zIndex: 999,
+    borderRadius: 1.5,
+    position:"absolute",
+    backgroundColor: "rgba(255,255,255,0.5)",
+    width:"100%",
+  },
+  dropDownbtnText: {
+    color: "#404040",
+    fontWeight: "500",
+    fontSize: 14,
+  },
+ 
+  dropDownrow: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 5
+    },
+  dropDownrowText: {
+    marginTop: 6,
+    marginBottom: 6,
+    fontSize: 15,
+  },
+  dropDown: { marginTop: 2 },
+  transformIcon:{
+    width: 22,
+    position:"absolute",
+    right:6,
+  },
 });
+
+export const marketDdsize = {
+};
+
+export const categoryDdsize = {
+};
+
+export const locationDdListsize = {
+  transform:[{translateY: -42}],
+};
+
+export const marketDdListsize = {
+  transform:[{translateY: -22}]
+};
+
+export const categoryDdListsize = {
+  transform:[{translateY: -22}]
+
+};
 
 
 export const iconColor = "#C3C3C3";

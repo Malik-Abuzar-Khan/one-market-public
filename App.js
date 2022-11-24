@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Home from "./src/screens/home";
 import SignIn from "./src/screens/sign_in";
 import SignUp from "./src/screens/sign_up";
@@ -6,6 +6,7 @@ import CustomizeShop from "./src/screens/customize_shop";
 import AllShops from "./src/screens/all_shops";
 import Shop from "./src/screens/shop";
 import Item from "./src/screens/view_item";
+import Admin from "./src/screens/admin";
 import { styles } from "./global-styles";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -14,11 +15,17 @@ import { store } from "./store/configure-store";
 import Header from "./src/components/header";
 import { navigationRef } from "./src/source_services/root=navigation";
 import { signOutUser } from "./src/screens/customize_shop/services";
+import { useSelector, useDispatch } from "react-redux";
+
 const Stack = createNativeStackNavigator();
 
 function App() {
   const [signOutLoading, setSignOutLoading] = useState(false);
-  const [currentUserToken, setCurrentUserToken] = useState({});
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token.data);
+  const number = useSelector((state) => state.number.data);
+  console.log("number: ", number)
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -28,16 +35,66 @@ function App() {
           headerTitle: () => (
             <Header
               icons={true}
-              token={currentUserToken}
+              token={token}
+              number={number}
               logOut={() =>
                 signOutUser(
                   navigationRef,
                   setSignOutLoading,
-                  setCurrentUserToken
+                  dispatch
                 )
               }
             />
           ),
+          headerShadowVisible: false,
+          headerStyle: { ...styles.header },
+        }}
+      />
+       <Stack.Screen
+        name="shop"
+        component={Shop}
+        options={{
+          headerTitle: () => (
+            <Header
+              icons={true}
+              token={token}
+              number={number}
+              logOut={() =>
+                signOutUser(
+                  navigationRef,
+                  setSignOutLoading,
+                  dispatch
+                )
+              }
+            />
+          ),
+          headerLeft: () => null,
+          headerBackVisible: false,
+          headerShadowVisible: false,
+          headerStyle: { ...styles.header },
+        }}
+      />
+           <Stack.Screen
+        name="admin"
+        component={Admin}
+        options={{
+          headerTitle: () => (
+            <Header
+              icons={true}
+              token={token}
+              number={number}
+              logOut={() =>
+                signOutUser(
+                  navigationRef,
+                  setSignOutLoading,
+                  dispatch
+                )
+              }
+            />
+          ),
+          headerLeft: () => null,
+          headerBackVisible: false,
+          headerShadowVisible: false,
           headerShadowVisible: false,
           headerStyle: { ...styles.header },
         }}
@@ -49,22 +106,23 @@ function App() {
       />
       <Stack.Screen
         name="register-user"
-        children={() => <SignUp setCurrentUserToken={setCurrentUserToken} />}
+        children={() => <SignUp/>}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name="all-shops"
-        children={() => <AllShops />}
+        component={AllShops}
         options={{
           headerTitle: () => (
             <Header
               icons={false}
-              token={currentUserToken}
+              token={token}
+              number={number}
               logOut={() =>
                 signOutUser(
                   navigationRef,
                   setSignOutLoading,
-                  setCurrentUserToken
+                  dispatch
                 )
               }
             />
@@ -75,42 +133,20 @@ function App() {
           headerStyle: { ...styles.header },
         }}
       />
-         <Stack.Screen
+      <Stack.Screen
         name="item"
         component={Item}
         options={{
           headerTitle: () => (
             <Header
               icons={true}
-              token={currentUserToken}
+              token={token}
+              number={number}
               logOut={() =>
                 signOutUser(
                   navigationRef,
                   setSignOutLoading,
-                  setCurrentUserToken
-                )
-              }
-            />
-          ),
-          headerLeft: () => null,
-          headerBackVisible: false,
-          headerShadowVisible: false,
-          headerStyle: { ...styles.header },
-        }}
-      />
-        <Stack.Screen
-        name="shop"
-        component={Shop}
-        options={{
-          headerTitle: () => (
-            <Header
-              icons={true}
-              token={currentUserToken}
-              logOut={() =>
-                signOutUser(
-                  navigationRef,
-                  setSignOutLoading,
-                  setCurrentUserToken
+                  dispatch
                 )
               }
             />
@@ -126,18 +162,19 @@ function App() {
         children={() => (
           <CustomizeShop
             signOutLoading={signOutLoading}
-            setCurrentUserToken={setCurrentUserToken}
+            currentUserToken={token}
           />
         )}
         options={{
           headerTitle: () => (
             <Header
-              token={currentUserToken}
+              token={token}
+              number={number}
               logOut={() =>
                 signOutUser(
                   navigationRef,
                   setSignOutLoading,
-                  setCurrentUserToken
+                  dispatch
                 )
               }
             />

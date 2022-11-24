@@ -13,3 +13,19 @@ export function navigateToAllShops(setShowNavigator, navigation) {
   setShowNavigator(false);
   navigation.navigate("all-shops");
 }
+
+
+export function navigateToSignIn(setShowNavigator, navigation) {
+  setShowNavigator(false);
+  navigation.navigate("sign-in");
+}
+
+export function navigateToRegister(setShowNavigator, navigation) {
+  setShowNavigator(false);
+  navigation.navigate("register-user");
+}
+
+export function navigateToAdmin(setShowNavigator, navigation) {
+  setShowNavigator(false);
+  navigation.navigate("admin");
+}

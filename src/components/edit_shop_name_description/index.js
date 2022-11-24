@@ -3,17 +3,19 @@ import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import PopUpScreenWrapper from "../pop_up_screen_wrapper";
 import { styles } from "./styles";
 import { CrossIcon } from "../svgs/svgs";
-import { updateShopNameAndDesciption } from "../dp_cover/services";
+import { updateShopNameAndDesciption } from "./services";
 import Loader from "../app_loader";
+import { useDispatch } from "react-redux";
 
 export default function EditShopNameAndDescripton({
   setEditShopNameAndDescriptionScreen,
-  token,
   docId,
+  setShopUpate
 }) {
   const [shopNameValue, setShopNameValue] = useState("");
   const [shopDescriptionValue, setShopDescriptionValue] = useState("");
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   return (
     <PopUpScreenWrapper extraStyles={styles.popUpScreenWrapperPadding}>
       <View>
@@ -52,12 +54,13 @@ export default function EditShopNameAndDescripton({
             style={styles.fromBtn}
             onPress={async () =>
               await updateShopNameAndDesciption(
-                token,
                 docId,
                 shopNameValue,
                 shopDescriptionValue,
                 setEditShopNameAndDescriptionScreen,
-                setLoading
+                setShopUpate,
+                setLoading,
+                dispatch
               )
             }
           >

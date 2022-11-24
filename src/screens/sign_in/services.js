@@ -1,15 +1,18 @@
-import { auth } from "../../../firebase_config/config";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import axiosBase from '../../../axios';
+import { getToken } from '../../../store/features/shopToken';
+import { getNumber } from '../../../store/features/number';
 import { Alert } from "react-native";
 
 export async function signIn(
-  email,
+  number,
   password,
   { setEmailError, setPasswordError, setPasswordLengthError },
+  dispatch,
   navigation,
   setLoading
 ) {
-  if (email.length === 0) {
+  setLoading(true);
+  if (number.length === 0) {
     setEmailError(true);
   }
   if (password.length === 0) {
@@ -18,17 +21,32 @@ export async function signIn(
   if (password.length < 6) {
     setPasswordLengthError(true);
   }
-  if (email.length <= 0 || password.length <= 0 || password.length < 6) {
+  if (number.length <= 0 || password.length <= 0 || password.length < 6) {
+    setLoading(false);
     return;
-  }
-  setLoading(true);
-  const lowerCaseEmail = email.toLowerCase();
+
+  }  
+  const data = {
+    phone_number: number,
+    password
+  };
   try {
-    await signInWithEmailAndPassword(auth, lowerCaseEmail, password);
-    navigation.navigate("customize-shop");
+    const response = await axiosBase.post('/sign-in', data);
+    if (response.data) {
+      dispatch(getToken(response.data.token))
+      dispatch(getNumber(number))
+      if(number?.substring(0, 5) !== 'admin'){
+        navigation.navigate('customize-shop')
+      } else {
+        navigation.navigate('admin')
+      }
+      console.log('Log_in successful!');
+    } else {
+      console.error('data not found!')
+    }
     setLoading(false);
   } catch (e) {
-    setLoading(false);
     Alert.alert("Wrong credentials user not found!");
+    setLoading(false)
   }
 }

@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+let height = Dimensions.get("window").height;
 
 export const styles = StyleSheet.create({
   mainContainer: {
@@ -49,7 +50,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
   },
   verticalScroll: {
-    height:"86%"
+    height:height - 156
   },
   marginTop: {
     marginTop: 16,

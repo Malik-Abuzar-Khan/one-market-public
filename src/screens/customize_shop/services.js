@@ -1,41 +1,40 @@
-import { db } from "../../../firebase_config/config";
-import { collection, onSnapshot } from "firebase/firestore";
-import { auth } from "../../../firebase_config/config";
-import { signOut } from "firebase/auth";
-import { Alert } from "react-native";
+import axiosBase from "../../../axios";
+import { getAllShops } from "../../../store/features/all_shops_slice";
+import { getAllItems } from "../../../store/features/get_all_items";
+import { getToken } from "../../../store/features/shopToken";
 
-function getShopDataFromDb(currentUser, setShopInfo) {
-  const collectionReference = collection(
-    db,
-    "shops",
-    `${currentUser?.uid}`,
-    "shop-details"
-  );
-  onSnapshot(collectionReference, (querySnapshot) => {
-    setShopInfo(querySnapshot.docs?.map((doc) => doc.data()));
-  });
+export async function getShopsDetails(setShops, dispatch) {
+  try {
+    const request = await axiosBase.get('/get-shops-details');
+    const data = await request.data['shops_details'];
+    if (data) {
+      setShops(data);
+      dispatch(getAllShops(data));
+    }
+  } catch (err) {
+    console.error({ message: err.message });
+  }
 }
 
-function getProducts(uid, setProducts) {
-  const collectionReference = collection(db, "shops", `${uid}`, "shop-items");
-  onSnapshot(collectionReference, (querySnapshot) => {
-    setProducts(
-      querySnapshot.docs?.map((doc) => ({ ...doc.data(), docId: doc.id }))
-    );
-  });
+export async function getShopItems(setProducts, dispatch) {
+  try {
+    const request = await axiosBase.get('/shop/get-items');
+    const data = await request.data.response;
+    if (data) {
+      setProducts(data);
+      dispatch(getAllItems(data));
+    }
+  } catch (err) {
+    console.error({ message: err.message });
+  }
 }
 
-function signOutUser(navigation, setLoading, setCurrentUserToken) {
-  setLoading(true);
-  signOut(auth)
-    .then(() => {
-      setLoading(false);
-      setCurrentUserToken("");
-      navigation.navigate("home");
-    })
-    .catch((error) => {
-      Alert.alert(error.message);
-    });
-}
 
-export { getShopDataFromDb, signOutUser, getProducts };
+
+export function signOutUser(navigationRef, setSignOutLoading, dispatch) {
+         setSignOutLoading(true);
+         navigationRef.navigate("home")
+         dispatch(getToken(""))
+         setSignOutLoading(false)
+     
+}

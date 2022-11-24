@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
 
   priceBtn: {
     width: "100%",
-    height: 34,
+    height: 74,
     backgroundColor: "#AC2727",
     justifyContent: "center",
     alignItems: "center",
@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
   },
   cartBtn: {
     width: "50%",
-    height: 34,
+    height: "100%",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",

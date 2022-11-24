@@ -1,33 +1,32 @@
 import React, { useState } from "react";
 import { styles, rowCellSizes } from "./styles";
 import { View, ScrollView, TouchableOpacity } from "react-native";
-import { Table, Row } from "react-native-table-component";
+import { Table, Row, Cell, TableWrapper } from "react-native-table-component";
 import RowItem from "./custom-row";
+import RowHeader from "./cutom-header";
 import { deleteProduct } from "./services";
-import Loader from "../app_loader";
+import { useDispatch } from "react-redux";
 
 const HeadTable = ["Product", "Product Name", "Update", "Delete"];
 
-export default function TableComp({ products }) {
+export default function TableComp({ products, setAddProduct }) {
   const [deleteBtnloader, setDeleteBtnloader] = useState(false);
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
-      <Table borderStyle={styles.borderStyle}>
-        <Row
-          data={HeadTable}
-          style={styles.HeadStyle}
-          widthArr={rowCellSizes}
-          textStyle={styles.itemsHeadingRowText}
-        />
-        <ScrollView style={{ ...styles.scrollViewHeight, ...styles.fullWidth }}>
+      <Table style={{ height: "100%" }} borderStyle={styles.borderStyle}>
+        <RowHeader/>
+        <ScrollView
+          style={{ ...styles.scrollViewHeight, ...styles.fullWidth }}>
           {products?.map(
-            ({ productName, productDescription, token, docId }) => (
-              <TouchableOpacity key={docId}>
+            ({ _id, item_name, item_discription, item_image, cloudinary_id, item_price }) => (
+              <TouchableOpacity key={_id}>
                 <RowItem
-                  productName={productName}
-                  productDescription={productDescription}
+                  productName={item_name?.length > 20 ? item_name.substring(0, 20)+' ...' : item_name }
+                  productDescription={item_discription?.length > 20 ? item_discription.substring(0, 20)+' ...': item_discription}
                   deleteIconOnPress={() =>
-                    deleteProduct(token, docId, setDeleteBtnloader)
+                    deleteProduct(_id, setAddProduct, dispatch)
                   }
                   deleteBtnloader={deleteBtnloader}
                 />

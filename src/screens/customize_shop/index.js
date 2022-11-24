@@ -1,39 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import { styles } from "./styles";
 import DpCover from "../../components/dp_cover";
 import TableComp from "../../components/table";
 import { SearchIcon } from "../../components/svgs/svgs";
-import { auth } from "../../../firebase_config/config";
-import { getProducts, getShopDataFromDb } from "./services";
+import { getShopItems, getShopsDetails } from "./services";
 import AddProductForm from "../../components/add_product_form";
 import Loader from "../../components/app_loader";
 
-export default function CustomizeShop({ signOutLoading, setCurrentUserToken }) {
+export default function CustomizeShop({ signOutLoading, ip }) {
+  const [inputValue, setInputValue] = useState('');
   const [shopInfo, setShopInfo] = useState([]);
   const [createProductScreen, setCreateProductScreen] = useState(false);
   const [products, setProducts] = useState([]);
-
-  let currentUser = auth?.currentUser;
+  const [addProduct, setAddProduct] = useState(0);
+  const [shopUpdate, setShopUpate] = useState(0);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token.data);
+  const update = useSelector((state) => state.update.data);
+  const number = useSelector((state) => state.number.data);
+  const filterShop = shopInfo?.filter((i) => i['primary_id'] === token);
+  const filterProducts = products?.filter((i) => i['primary_id'] === token);
+  const searchFilter = filterProducts?.length > 0 && filterProducts?.filter((i) => {
+    if(inputValue.length > 0){
+      return i['item_name'].toLocaleLowerCase().includes(inputValue.toLocaleLowerCase())
+    }
+  });
 
   useEffect(() => {
-    const unsub = getShopDataFromDb(currentUser, setShopInfo);
-    return () => unsub;
-  }, []);
+    getShopItems(setProducts, dispatch)
+  }, [update]);
 
   useEffect(() => {
-    setCurrentUserToken(currentUser?.uid);
-    const unsub = getProducts(currentUser?.uid, setProducts);
-    return () => unsub;
-  }, []);
-
+    getShopsDetails(setShopInfo, dispatch)
+  }, [update])
   return (
     <>
       <View style={styles.mainContainer}>
         <View style={styles.wrapperContainer}>
           <View>
             <View style={styles.dpCoverMainContainer}>
-              <DpCover shopInfo={shopInfo} currentUser={currentUser} />
+              <DpCover shopInfo={filterShop} setShopUpate={setShopUpate} />
             </View>
             <View style={styles.inputContainer}>
               <View style={styles.searchIconContainer}>
@@ -42,21 +50,25 @@ export default function CustomizeShop({ signOutLoading, setCurrentUserToken }) {
               <TextInput
                 style={styles.input}
                 placeholder="Name of shop(Optional)"
+                value={inputValue}
+                onChangeText={setInputValue}
               />
             </View>
             <TouchableOpacity
-              onPress={() => setCreateProductScreen(true)}
+              onPress={() =>
+                setCreateProductScreen(true)
+              }
               style={styles.addProductBtnContainer}
             >
               <Text style={styles.addProductBtnText}>Add Product</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.addProductTableContainer}>
-            <TableComp products={products} />
-          </View>
+          {/* <View style={styles.addProductTableContainer}> */}
+            <TableComp products={searchFilter?.length > 0 ? searchFilter : filterProducts} setAddProduct={setAddProduct} />
+          {/* </View> */}
         </View>
         {createProductScreen && (
-          <AddProductForm setCreateProductScreen={setCreateProductScreen} />
+          <AddProductForm setCreateProductScreen={setCreateProductScreen} token={token} number={number} setAddProduct={setAddProduct} /> 
         )}
       </View>
       {signOutLoading && <Loader />}
