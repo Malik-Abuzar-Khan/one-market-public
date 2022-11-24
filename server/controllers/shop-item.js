@@ -2,6 +2,7 @@ const { itemModel } = require('../models/shop-items');
 
 async function createItem(req, res) {
     const { _primary_id, item_name, item_discription, item_image, cloudinary_id, item_price } = req.body;
+    console.log("id in server: ", _primary_id)
     try {
         const itemData = {
             primary_id: _primary_id,
@@ -47,6 +48,7 @@ async function deleteItem(req, res) {
             else {
                 console.log("Deleted : ", docs);
                 // res.status(200).json({ message: "product delete sucessfully" });
+                res.end("item deleted");
             }
         })
     } catch (e) {
